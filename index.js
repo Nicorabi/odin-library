@@ -31,7 +31,7 @@ function render() {
             <p>Pages: ${book.pages}</p>
             <p class="read-status">Read: ${book.read ? 'Read' : 'Not read yet'}</p>
             <button class='remove-button' onclick='removeBook(${i})'>Remove</button>
-            <button class='toggle-read' onclick='toggleRead(${i})'>Toggle Read</button>
+            <button class='toggle-read' onclick='toggleRead(${i})'>Read</button>
             `;
         libraryBook.appendChild(bookElement);
     }
@@ -61,4 +61,13 @@ addButton.addEventListener('click', function () {
 document.querySelector('#form').addEventListener('submit', function (e) {
     e.preventDefault();
     addBook();
-})
+    let allInputs = document.querySelectorAll('input');
+    allInputs.forEach(singleInput => {
+        if (singleInput.type === 'checkbox') {
+            singleInput.checked = false;
+        } else {
+            singleInput.value = '';
+        }
+    });
+    document.querySelector('#form').style.display = 'none';
+});
